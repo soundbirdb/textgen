@@ -78,6 +78,14 @@ For the full list of options run:
 python server.py --help
 ```
 
+### My personal startup command
+
+I typically run this on my local machine with a llama.cpp model and the API enabled:
+
+```bash
+python server.py --model models/mistral-7b-instruct.Q4_K_M.gguf --n-gpu-layers 28 --api
+```
+
 ## Contributing
 
 Pull requests are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) and use the provided PR template.
