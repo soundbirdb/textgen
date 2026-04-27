@@ -57,8 +57,10 @@ def parse_arguments():
     # Defaulting threads to 4 instead of 0 — works better on my machine (6-core CPU)
     parser.add_argument('--threads', type=int, default=4,
                         help='Number of threads for CPU inference')
-    parser.add_argument('--n-ctx', type=int, default=4096,
-                        help='Context size (llama.cpp); bumped default from None to 4096 — most models I use support it')
+    # n-ctx default bumped from None to 4096 — most models I use support it
+    # Further bumped to 8192 — I mostly run Mistral/Llama2 which handle it fine
+    parser.add_argument('--n-ctx', type=int, default=8192,
+                        help='Context size (llama.cpp)')
     parser.add_argument('--load-in-8bit', action='store_true',
                         help='Load model in 8-bit quantization')
     parser.add_argument('--load-in-4bit', action='store_true',
@@ -67,5 +69,4 @@ def parse_arguments():
     # Server arguments
     parser.add_argument('--listen', action='store_true',
                         help='Make the server accessible on the local network')
-    parser.add_argument('--listen-port', type=int, default=7860,
-                        help='Port to listen
+    parser.add_argument('--listen-port', typ
