@@ -80,10 +80,10 @@ python server.py --help
 
 ### My personal startup command
 
-I typically run this on my local machine with a llama.cpp model and the API enabled:
+I typically run this on my local machine with a llama.cpp model and the API enabled. I bumped `--n-gpu-layers` to 35 after finding my RTX 3070 can handle it without running out of VRAM on Q4_K_M models.
 
 ```bash
-python server.py --model models/mistral-7b-instruct.Q4_K_M.gguf --n-gpu-layers 28 --api
+python server.py --model models/mistral-7b-instruct.Q4_K_M.gguf --n-gpu-layers 35 --api
 ```
 
 ## Contributing
