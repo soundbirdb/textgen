@@ -81,10 +81,10 @@ python server.py --help
 
 ### My personal startup command
 
-I typically run this on my local machine with a llama.cpp model and the API enabled. I bumped `--n-gpu-layers` to 35 after finding my RTX 3070 can handle it without running out of VRAM on Q4_K_M models. Added `--ctx-size 4096` because the default 2048 was cutting off longer conversations.
+I typically run this on my local machine with a llama.cpp model and the API enabled. I bumped `--n-gpu-layers` to 35 after finding my RTX 3070 can handle it without running out of VRAM on Q4_K_M models. Added `--ctx-size 4096` because the default 2048 was cutting off longer conversations. Added `--threads 8` to match my CPU core count — made a noticeable difference in prompt processing speed.
 
 ```bash
-python server.py --model models/mistral-7b-instruct.Q4_K_M.gguf --n-gpu-layers 35 --ctx-size 4096 --api
+python server.py --model models/mistral-7b-instruct.Q4_K_M.gguf --n-gpu-layers 35 --ctx-size 4096 --threads 8 --api
 ```
 
 ## Contributing
@@ -92,8 +92,4 @@ python server.py --model models/mistral-7b-instruct.Q4_K_M.gguf --n-gpu-layers 3
 Pull requests are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) and use the provided PR template.
 
 For bugs, use the [bug report template](.github/ISSUE_TEMPLATE/bug_report_template.yml).  
-For feature ideas, use the [feature request template](.github/ISSUE_TEMPLATE/feature_request.md).
-
-## License
-
-This project is licensed under the [AGPL-3.0 License](LICENSE).
+For feature ideas, use the [feature request template](.github/ISSUE_
