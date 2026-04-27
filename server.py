@@ -54,7 +54,8 @@ def parse_arguments():
                         help='Maximum CPU memory in GiB for offloading')
     parser.add_argument('--n-gpu-layers', type=int, default=None,
                         help='Number of layers to offload to GPU (llama.cpp)')
-    parser.add_argument('--threads', type=int, default=0,
+    # Defaulting threads to 4 instead of 0 — works better on my machine (6-core CPU)
+    parser.add_argument('--threads', type=int, default=4,
                         help='Number of threads for CPU inference')
     parser.add_argument('--n-ctx', type=int, default=None,
                         help='Context size (llama.cpp)')
@@ -68,83 +69,4 @@ def parse_arguments():
                         help='Make the server accessible on the local network')
     parser.add_argument('--listen-port', type=int, default=7860,
                         help='Port to listen on when --listen is used')
-    parser.add_argument('--listen-host', type=str, default='0.0.0.0',
-                        help='Host to listen on when --listen is used')
-    parser.add_argument('--share', action='store_true',
-                        help='Create a public Gradio share link')
-    parser.add_argument('--auto-launch', action='store_true', default=True,
-                        help='Open the web UI in the default browser on startup')
-    parser.add_argument('--gradio-auth', type=str, default=None,
-                        help='Gradio authentication in format username:password')
-    parser.add_argument('--api', action='store_true',
-                        help='Enable the API extension')
-    parser.add_argument('--api-port', type=int, default=5000,
-                        help='Port for the API server')
-    parser.add_argument('--api-key', type=str, default='',
-                        help='API key for authentication')
-    parser.add_argument('--public-api', action='store_true',
-                        help='Create a public Gradio share link for the API')
-
-    # UI arguments
-    parser.add_argument('--chat', action='store_true',
-                        help='Launch in chat mode by default')
-    parser.add_argument('--notebook', action='store_true',
-                        help='Launch in notebook mode by default')
-    parser.add_argument('--extensions', type=str, nargs='+', default=None,
-                        help='Extensions to load at startup')
-    parser.add_argument('--verbose', action='store_true',
-                        help='Enable verbose logging output')
-
-    return parser.parse_args()
-
-
-def check_requirements():
-    """
-    Check that required dependencies are available.
-    """
-    try:
-        import torch
-        logger.info(f'PyTorch version: {torch.__version__}')
-        if torch.cuda.is_available():
-            logger.info(f'CUDA available: {torch.cuda.get_device_name(0)}')
-        else:
-            logger.warning('CUDA not available, running on CPU')
-    except ImportError:
-        logger.error('PyTorch is not installed. Please install it before running.')
-        sys.exit(1)
-
-    try:
-        import gradio
-        logger.info(f'Gradio version: {gradio.__version__}')
-    except ImportError:
-        logger.error('Gradio is not installed. Please run: pip install gradio')
-        sys.exit(1)
-
-
-def main():
-    """
-    Main entry point for the TextGen server.
-    """
-    args = parse_arguments()
-
-    if args.verbose:
-        logging.getLogger().setLevel(logging.DEBUG)
-
-    logger.info('Starting TextGen Web UI...')
-    check_requirements()
-
-    # Ensure required directories exist
-    for directory in ['models', 'loras', 'characters', 'presets', 'prompts', 'extensions', 'logs']:
-        os.makedirs(directory, exist_ok=True)
-
-    logger.info(f'Model directory: {args.model_dir}')
-    if args.model:
-        logger.info(f'Loading model: {args.model}')
-
-    # TODO: Initialize the UI and model loader
-    # This will be expanded as modules are added
-    logger.info('Server initialization complete.')
-
-
-if __name__ == '__main__':
-    main()
+    parser.add_argument('--listen-host', type=str, defaul
