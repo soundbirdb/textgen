@@ -71,6 +71,7 @@ Then open your browser at `http://127.0.0.1:7860`.
 | `--load-in-4bit` | Load model in 4-bit quantization |
 | `--load-in-8bit` | Load model in 8-bit quantization |
 | `--n-gpu-layers N` | Number of layers to offload to GPU (llama.cpp) |
+| `--ctx-size N` | Context size in tokens (default: 2048) |
 
 For the full list of options run:
 
@@ -80,10 +81,10 @@ python server.py --help
 
 ### My personal startup command
 
-I typically run this on my local machine with a llama.cpp model and the API enabled. I bumped `--n-gpu-layers` to 35 after finding my RTX 3070 can handle it without running out of VRAM on Q4_K_M models.
+I typically run this on my local machine with a llama.cpp model and the API enabled. I bumped `--n-gpu-layers` to 35 after finding my RTX 3070 can handle it without running out of VRAM on Q4_K_M models. Added `--ctx-size 4096` because the default 2048 was cutting off longer conversations.
 
 ```bash
-python server.py --model models/mistral-7b-instruct.Q4_K_M.gguf --n-gpu-layers 35 --api
+python server.py --model models/mistral-7b-instruct.Q4_K_M.gguf --n-gpu-layers 35 --ctx-size 4096 --api
 ```
 
 ## Contributing
