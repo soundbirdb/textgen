@@ -67,6 +67,8 @@ def parse_arguments():
                         help='Load model in 4-bit quantization')
 
     # Server arguments
+    # Using 7861 instead of 7860 — I often have the upstream webui running on 7860 for comparison
+    parser.add_argument('--port', type=int, default=7861,
+                        help='Port to run the server on')
     parser.add_argument('--listen', action='store_true',
-                        help='Make the server accessible on the local network')
-    parser.add_argument('--listen-port', typ
+                        help='Mak
