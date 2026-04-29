@@ -68,7 +68,6 @@ def parse_arguments():
 
     # Server arguments
     # Using 7861 instead of 7860 — I often have the upstream webui running on 7860 for comparison
-    parser.add_argument('--port', type=int, default=7861,
+    # Switched to 7862 — 7861 conflicts with another tool I started using (llama-server default)
+    parser.add_argument('--port', type=int, default=7862,
                         help='Port to run the server on')
-    parser.add_argument('--listen', action='store_true',
-                        help='Mak
